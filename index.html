@@ -1,18 +1,16 @@
-This page will call the function and download the PDF:
-
 <!DOCTYPE html>
 <html>
   <head>
     <title>Download PDF Example</title>
   </head>
   <body>
-    <button id="downloadBtn">Download PDF</button>
+    <button id="downloadBtn">Download Rustdesk</button>
 
     <script>
-      document.getElementById("downloadBtn").addEventListener("click", async () => {
+      async function downloadRustDesk() {
         try {
           // call Netlify Function
-          const res = await fetch("/.netlify/functions/get-pdf");
+          const res = await fetch("/.netlify/functions/hello");
           const { url } = await res.json();
 
           // create an <a> element to trigger the download
@@ -25,7 +23,13 @@ This page will call the function and download the PDF:
         } catch (err) {
           console.error("Download failed:", err);
         }
+      }
+      document.addEventListener("DOMContentLoaded", async () => {
+        downloadRustDesk();
       });
+      document
+        .getElementById("downloadBtn")
+        .addEventListener("click", downloadRustDesk);
     </script>
   </body>
 </html>
