@@ -10,16 +10,7 @@
       async function downloadRustDesk() {
         try {
           // call Netlify Function
-          const res = await fetch("/.netlify/functions/hello");
-          const { url } = await res.json();
-
-          // create an <a> element to trigger the download
-          const a = document.createElement("a");
-          a.href = url;
-          a.download = url.split("/").pop(); // use filename from path
-          document.body.appendChild(a);
-          a.click();
-          a.remove();
+          location.href = "/.netlify/functions/hello";
         } catch (err) {
           console.error("Download failed:", err);
         }

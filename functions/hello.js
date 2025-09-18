@@ -17,13 +17,11 @@ export async function handler(event, context) {
   if (!asset) throw new Error("No matching Windows EXE found.");
 
   const url = asset.browser_download_url;
-  return {
-    statusCode: 200,
-    body: JSON.stringify({
-      url,
-    }),
+    return {
+    statusCode: 302,
     headers: {
-      "Content-Type": "application/json",
+      Location: url, // this tells the browser to redirect
     },
   };
+
 }
