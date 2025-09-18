@@ -1,0 +1,31 @@
+This page will call the function and download the PDF:
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Download PDF Example</title>
+  </head>
+  <body>
+    <button id="downloadBtn">Download PDF</button>
+
+    <script>
+      document.getElementById("downloadBtn").addEventListener("click", async () => {
+        try {
+          // call Netlify Function
+          const res = await fetch("/.netlify/functions/get-pdf");
+          const { url } = await res.json();
+
+          // create an <a> element to trigger the download
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = url.split("/").pop(); // use filename from path
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+        } catch (err) {
+          console.error("Download failed:", err);
+        }
+      });
+    </script>
+  </body>
+</html>
